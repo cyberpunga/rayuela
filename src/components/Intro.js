@@ -3,16 +3,7 @@ import { jsx, Themed, Label, Grid, Box } from "theme-ui"
 import React, { useState } from "react"
 import { Link } from "gatsby"
 
-import secondOrder from "../cortazarOrder.json"
-
 export default function Intro() {
-  const [order, setOrder] = useState(null)
-  const chapters = [...Array(155).keys()].map(x => ++x)
-  const parts = 5
-  let columns = []
-  for (let i = parts; i > 0; i--) {
-    columns.push(chapters.splice(0, Math.ceil(chapters.length / i)))
-  }
   return (
     <div>
       <div
@@ -21,6 +12,7 @@ export default function Intro() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          textAlign: "center",
         }}
       >
         <Themed.h3 sx={{ my: 0 }}>Julio Cortazar</Themed.h3>
@@ -31,57 +23,10 @@ export default function Intro() {
       <Themed.p>
         A su manera este libro es muchos libros, pero sobre todo es dos libros.
       </Themed.p>
-      <Label>
-        {/* <div sx={{ display: "flex", alignItems: "center", mr: 2 }}>
-          <Radio name="book" />
-        </div> */}
-        <Themed.p
-          sx={{ bg: order ? "secondary" : "background" }}
-          onClick={() => setOrder(true)}
-        >
-          El primero se deja leer en la forma corriente, y termina en el
-          capítulo{" "}
-          <Themed.a as={Link} to="/capitulo/56">
-            56
-          </Themed.a>
-          , al pie del cual hay tres vistosas estrellitas que equivalen a la
-          palabra Fin. Por consiguiente, el lector prescindirá sin
-          remordimientos de lo que sigue.
-        </Themed.p>
-      </Label>
-      <Label>
-        {/* <div sx={{ display: "flex", alignItems: "center", mr: 2 }}>
-          <Radio name="book" />
-        </div> */}
-        <Themed.p
-          sx={{ bg: order === false ? "secondary" : "background" }}
-          onClick={() => setOrder(false)}
-        >
-          El segundo se deja leer empezando por el capítulo{" "}
-          <Themed.a as={Link} to="/capitulo/73">
-            73
-          </Themed.a>{" "}
-          y siguiendo luego en el orden que se indica al pie de cada capítulo.{" "}
-          {/* <del> */}
-          En caso de confusión u olvido, bastará consultar la lista siguiente:
-          {/* </del> */}
-        </Themed.p>
-      </Label>
 
-      <Themed.p>
-        {secondOrder.map((num, idx) => (
-          <React.Fragment key={idx}>
-            <Themed.a
-              as={Link}
-              to={`/capitulo/${num}`}
-              sx={{ textAlign: "center" }}
-            >
-              {num}
-            </Themed.a>{" "}
-            {num === secondOrder[secondOrder.length - 1] ? "" : "-"}{" "}
-          </React.Fragment>
-        ))}
-      </Themed.p>
+      <OrderSelect />
+
+      <SecondaryList />
 
       <Themed.p>
         Con el objeto de facilitar la rápida ubicación de los capítulos, la
@@ -89,23 +34,7 @@ export default function Intro() {
         cada uno de ellos.
       </Themed.p>
 
-      <Grid columns={5} sx={{ my: 8 }}>
-        {columns.map(x => (
-          <Box key={x} sx={{ display: "flex", flexDirection: "column" }}>
-            {x.map(z => (
-              <Themed.p key={z} sx={{ textAlign: "center", my: 0 }}>
-                <Themed.a
-                  as={Link}
-                  to={`/capitulo/${z}`}
-                  sx={{ textAlign: "center" }}
-                >
-                  {z}
-                </Themed.a>
-              </Themed.p>
-            ))}
-          </Box>
-        ))}
-      </Grid>
+      <Columns />
 
       <div
         sx={{
@@ -209,5 +138,262 @@ export default function Intro() {
         </Themed.p>
       </div>
     </div>
+  )
+}
+
+export const secondaryOrder = [
+  73,
+  1,
+  2,
+  116,
+  3,
+  84,
+  4,
+  71,
+  5,
+  81,
+  74,
+  6,
+  7,
+  8,
+  93,
+  68,
+  9,
+  104,
+  10,
+  65,
+  11,
+  136,
+  12,
+  106,
+  13,
+  115,
+  14,
+  114,
+  117,
+  15,
+  120,
+  16,
+  137,
+  17,
+  97,
+  18,
+  153,
+  19,
+  90,
+  20,
+  126,
+  21,
+  79,
+  22,
+  62,
+  23,
+  124,
+  128,
+  24,
+  134,
+  25,
+  141,
+  60,
+  26,
+  109,
+  27,
+  28,
+  130,
+  151,
+  152,
+  143,
+  100,
+  76,
+  101,
+  144,
+  92,
+  103,
+  108,
+  64,
+  155,
+  123,
+  145,
+  122,
+  112,
+  154,
+  85,
+  150,
+  95,
+  146,
+  29,
+  107,
+  113,
+  30,
+  57,
+  70,
+  147,
+  31,
+  32,
+  132,
+  61,
+  33,
+  67,
+  83,
+  142,
+  34,
+  87,
+  105,
+  96,
+  94,
+  91,
+  82,
+  99,
+  35,
+  121,
+  36,
+  37,
+  98,
+  38,
+  39,
+  86,
+  78,
+  40,
+  59,
+  41,
+  148,
+  42,
+  75,
+  43,
+  125,
+  44,
+  102,
+  45,
+  80,
+  46,
+  47,
+  110,
+  48,
+  111,
+  49,
+  118,
+  50,
+  119,
+  51,
+  69,
+  52,
+  89,
+  53,
+  66,
+  149,
+  54,
+  129,
+  139,
+  133,
+  140,
+  138,
+  127,
+  56,
+  135,
+  63,
+  88,
+  72,
+  77,
+  131,
+  58,
+  131,
+]
+
+function OrderSelect() {
+  const [order, setOrder] = useState(null)
+  return (
+    <React.Fragment>
+      <Label>
+        {/* <div sx={{ display: "flex", alignItems: "center", mr: 2 }}>
+          <Radio name="book" />
+        </div> */}
+        <Themed.p
+          sx={{ bg: order ? "secondary" : "background" }}
+          onClick={() => setOrder(true)}
+        >
+          El primero se deja leer en la forma corriente, y termina en el
+          capítulo{" "}
+          <Themed.a as={Link} to="/capitulo/56">
+            56
+          </Themed.a>
+          , al pie del cual hay tres vistosas estrellitas que equivalen a la
+          palabra Fin. Por consiguiente, el lector prescindirá sin
+          remordimientos de lo que sigue.
+        </Themed.p>
+      </Label>
+      <Label>
+        {/* <div sx={{ display: "flex", alignItems: "center", mr: 2 }}>
+          <Radio name="book" />
+        </div> */}
+        <Themed.p
+          sx={{ bg: order === false ? "secondary" : "background" }}
+          onClick={() => setOrder(false)}
+        >
+          El segundo se deja leer empezando por el capítulo{" "}
+          <Themed.a as={Link} to="/capitulo/73">
+            73
+          </Themed.a>{" "}
+          y siguiendo luego en el orden que se indica al pie de cada capítulo.{" "}
+          {/* <del> */}
+          En caso de confusión u olvido, bastará consultar la lista siguiente:
+          {/* </del> */}
+        </Themed.p>
+      </Label>
+    </React.Fragment>
+  )
+}
+
+function SecondaryList() {
+  return (
+    <Themed.p
+      sx={{
+        overflowX: "scroll",
+        display: "flex",
+        padding: 3,
+        // bg: "muted",
+        // borderRadius: 3,
+      }}
+    >
+      {secondaryOrder.map((num, idx) => (
+        <React.Fragment key={idx}>
+          <Themed.a
+            as={Link}
+            to={`/capitulo/${num}`}
+            sx={{ textAlign: "center", mx: 2 }}
+          >
+            {num}
+          </Themed.a>{" "}
+          {idx === secondaryOrder.length - 1 ? "" : "-"}{" "}
+        </React.Fragment>
+      ))}
+    </Themed.p>
+  )
+}
+
+function Columns() {
+  const chapters = [...Array(155).keys()].map(x => ++x)
+  const parts = 5
+  let columns = []
+  for (let i = parts; i > 0; i--) {
+    columns.push(chapters.splice(0, Math.ceil(chapters.length / i)))
+  }
+  return (
+    <Grid columns={5} sx={{ my: 8 }}>
+      {columns.map(x => (
+        <Box key={x} sx={{ display: "flex", flexDirection: "column" }}>
+          {x.map(z => (
+            <Themed.p key={z} sx={{ textAlign: "center", my: 0 }}>
+              <Themed.a
+                as={Link}
+                to={`/capitulo/${z}`}
+                sx={{ textAlign: "center" }}
+              >
+                {z}
+              </Themed.a>
+            </Themed.p>
+          ))}
+        </Box>
+      ))}
+    </Grid>
   )
 }
