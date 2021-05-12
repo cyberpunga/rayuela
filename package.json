@@ -14,23 +14,23 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "@fontsource/crimson-pro": "^4.2.2",
+    "@fontsource/crimson-pro": "^4.3.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@theme-ui/color": "^0.7.5",
-    "@theme-ui/presets": "^0.7.5",
-    "gatsby": "^3.3.1",
-    "gatsby-plugin-catch-links": "^3.4.0",
-    "gatsby-plugin-mdx": "^2.4.0",
-    "gatsby-plugin-theme-ui": "^0.7.5",
-    "gatsby-source-filesystem": "^3.4.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "@theme-ui/color": "^0.8.4",
+    "@theme-ui/presets": "^0.8.4",
+    "gatsby": "^3.5.0",
+    "gatsby-plugin-catch-links": "^3.5.0",
+    "gatsby-plugin-mdx": "^2.5.0",
+    "gatsby-plugin-theme-ui": "^0.8.4",
+    "gatsby-source-filesystem": "^3.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-intersection-observer": "^8.31.1",
-    "theme-ui": "^0.7.5"
+    "theme-ui": "^0.8.4"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "prettier": "2.3.0"
   },
   "repository": {
     "type": "git",
