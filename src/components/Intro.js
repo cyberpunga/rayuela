@@ -3,6 +3,8 @@ import { jsx, Themed, Label, Grid, Box } from "theme-ui"
 import React, { useState } from "react"
 import { Link } from "gatsby"
 
+import useStore from "../store"
+
 export default function Intro() {
   return (
     <div>
@@ -300,45 +302,35 @@ export const secondaryOrder = [
 ]
 
 function OrderSelect() {
-  const [order, setOrder] = useState(null)
+  const { chapterOrder, changeOrder } = useStore()
+  const isPrimary = chapterOrder === "primary"
   return (
     <React.Fragment>
-      <Label>
-        {/* <div sx={{ display: "flex", alignItems: "center", mr: 2 }}>
-          <Radio name="book" />
-        </div> */}
-        <Themed.p
-          sx={{ bg: order ? "secondary" : "background" }}
-          onClick={() => setOrder(true)}
-        >
-          El primero se deja leer en la forma corriente, y termina en el
-          capítulo{" "}
-          <Themed.a as={Link} to="/capitulo/56">
-            56
-          </Themed.a>
-          , al pie del cual hay tres vistosas estrellitas que equivalen a la
-          palabra Fin. Por consiguiente, el lector prescindirá sin
-          remordimientos de lo que sigue.
-        </Themed.p>
-      </Label>
-      <Label>
-        {/* <div sx={{ display: "flex", alignItems: "center", mr: 2 }}>
-          <Radio name="book" />
-        </div> */}
-        <Themed.p
-          sx={{ bg: order === false ? "secondary" : "background" }}
-          onClick={() => setOrder(false)}
-        >
-          El segundo se deja leer empezando por el capítulo{" "}
-          <Themed.a as={Link} to="/capitulo/73">
-            73
-          </Themed.a>{" "}
-          y siguiendo luego en el orden que se indica al pie de cada capítulo.{" "}
-          {/* <del> */}
-          En caso de confusión u olvido, bastará consultar la lista siguiente:
-          {/* </del> */}
-        </Themed.p>
-      </Label>
+      <Themed.p
+        sx={{ bg: isPrimary ? "secondary" : "background" }}
+        onClick={() => changeOrder("primary")}
+      >
+        El primero se deja leer en la forma corriente, y termina en el capítulo{" "}
+        <Themed.a as={Link} to="/capitulo/56">
+          56
+        </Themed.a>
+        , al pie del cual hay tres vistosas estrellitas que equivalen a la
+        palabra Fin. Por consiguiente, el lector prescindirá sin remordimientos
+        de lo que sigue.
+      </Themed.p>
+      <Themed.p
+        sx={{ bg: !isPrimary ? "secondary" : "background" }}
+        onClick={() => changeOrder("secondary")}
+      >
+        El segundo se deja leer empezando por el capítulo{" "}
+        <Themed.a as={Link} to="/capitulo/73">
+          73
+        </Themed.a>{" "}
+        y siguiendo luego en el orden que se indica al pie de cada capítulo.{" "}
+        {/* <del> */}
+        En caso de confusión u olvido, bastará consultar la lista siguiente:
+        {/* </del> */}
+      </Themed.p>
     </React.Fragment>
   )
 }

@@ -27,7 +27,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^8.31.1",
-    "theme-ui": "^0.8.4"
+    "theme-ui": "^0.8.4",
+    "zustand": "^3.5.1"
   },
   "devDependencies": {
     "prettier": "2.3.0"
